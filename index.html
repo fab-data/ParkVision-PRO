@@ -98,7 +98,7 @@
     <div class="integration-line"><span><i></i><strong>Integrações externas: não conectadas</strong> · Sem leitura de câmeras, sensores, cancelas ou pagamentos</span><span>Simulação acelerada: 1 minuto virtual a cada 5 segundos em 1×</span></div>
   </section>
   <section class="main">
-    <div class="card mapcard"><div class="maphead"><div class="mht"><div><h2>Mapa operacional</h2><p>Selecione uma vaga para consultar situação e cobrança · <span id="mMoving">0</span> veículos em movimento · <span id="mArrivals">0</span> entradas / <span id="mDepartures">0</span> saídas</p></div></div><div class="map-controls"><div class="segmented floorseg" id="floors"><button type="button" data-floor="0" class="active">G1</button><button type="button" data-floor="1">G2</button><button type="button" data-floor="2">G3</button></div><div class="segmented"><button id="isoBtn" type="button" class="active">◇ 3D</button><button id="topBtn" type="button">▦ Planta 2D</button></div></div></div>
+    <div class="card mapcard"><div class="maphead"><div class="mht"><div><h2>Mapa operacional</h2><p>Selecione uma vaga para consultar situação e cobrança · <span id="mMoving">0</span> veículos em movimento · <span id="mQueued">0</span> em fila · <span id="mArrivals">0</span> entradas / <span id="mDepartures">0</span> saídas</p></div></div><div class="map-controls"><div class="segmented floorseg" id="floors"><button type="button" data-floor="0" class="active">G1</button><button type="button" data-floor="1">G2</button><button type="button" data-floor="2">G3</button></div><div class="segmented"><button id="isoBtn" type="button" class="active">◇ 3D</button><button id="topBtn" type="button">▦ Planta 2D</button></div></div></div>
       <div class="mapstage" id="stage"><canvas id="scene" aria-label="Mapa interativo com vagas e veículos do estacionamento"></canvas>
         <div class="location-marker" id="locationMarker" hidden aria-hidden="true"><span class="marker-core"></span><span class="marker-label" id="locationMarkerLabel"></span></div>
         <div class="location-panel" id="locationPanel" hidden role="status" aria-live="polite" tabindex="-1">
@@ -106,10 +106,10 @@
           <div id="locationMeta" class="location-meta"></div>
           <div id="locationCharge" class="location-charge"></div>
           <div class="location-panel-actions"><button type="button" id="locationBack">Voltar ao acompanhamento</button><button type="button" id="locationReset">Ver mapa completo</button></div>
-        </div><div class="maphud"><b id="floorLabel">PISO G1 / 3D ISOMÉTRICO</b><small id="floorSub">120 vagas · 6 setores</small></div><div class="mapcompass"><i>▲</i>N</div><div role="tooltip" aria-label="Detalhes da vaga e cobrança" class="hover" id="hover"></div><div class="bottomleft"><i></i><span id="stageStatus">SIMULAÇÃO · FLUXO EM MOVIMENTO</span></div><div class="maptools"><button id="zoomIn" aria-label="Aproximar" title="Aproximar">+</button><button id="zoomOut" aria-label="Afastar" title="Afastar">−</button><button id="rotateLeft" aria-label="Girar à esquerda" title="Girar à esquerda">↶</button><button id="rotateRight" aria-label="Girar à direita" title="Girar à direita">↷</button><button id="resetView" aria-label="Restaurar visão" title="Restaurar visão">⌖</button></div></div>
-      <div class="mapfooter"><div class="legend"><span><i class="sw"></i> Livre</span><span><i class="sw busy"></i> Ocupada</span><span><i class="sw ev"></i> Elétrica</span><span><i class="sw acc"></i> Acessível</span></div><div class="map-note">Dica: passe o mouse sobre os carros para consultar o tíquete.</div></div>
+        </div><div class="maphud"><b id="floorLabel">PISO G1 / 3D ISOMÉTRICO</b><small id="floorSub">120 vagas · 6 setores</small></div><div class="mapcompass"><i>▲</i>N</div><div role="tooltip" aria-label="Detalhes da vaga e cobrança" class="hover" id="hover"></div><div class="bottomleft"><i></i><span id="stageStatus">TRÁFEGO 3D · ANTICOLISÃO ATIVA</span></div><div class="maptools"><button id="zoomIn" aria-label="Aproximar" title="Aproximar">+</button><button id="zoomOut" aria-label="Afastar" title="Afastar">−</button><button id="rotateLeft" aria-label="Girar à esquerda" title="Girar à esquerda">↶</button><button id="rotateRight" aria-label="Girar à direita" title="Girar à direita">↷</button><button id="resetView" aria-label="Restaurar visão" title="Restaurar visão">⌖</button></div></div>
+      <div class="mapfooter"><div class="legend"><span><i class="sw"></i> Livre</span><span><i class="sw busy"></i> Ocupada</span><span><i class="sw ev"></i> Elétrica</span><span><i class="sw acc"></i> Acessível</span></div><div class="map-note">Faixas separadas, curvas progressivas e manobras com distância de segurança.</div></div>
       <div class="mapinsights"><div class="mapinsight"><span class="glyph">↗</span><div><small>ACESSOS E RAMPAS</small><b>2 conexões</b><em>Vias interligadas</em></div></div><div class="mapinsight"><span class="glyph">ϟ</span><div><small>VAGAS ELÉTRICAS</small><b>24 vagas</b><em>Em 3 pavimentos</em></div></div><div class="mapinsight"><span class="glyph">↺</span><div><small>MANOBRAS NO PISO</small><b id="mManeuvers">0 carros</b><em id="maneuverSub">No piso G1</em></div></div></div>
-      <details class="simulation-tools"><summary>Ferramentas da simulação</summary><div class="simulation-actions"><button id="pause" class="btn primary">Ⅱ &nbsp; Pausar</button><button id="addCars" class="btn">+ 5 entradas</button><button id="removeCars" class="btn">− 5 saídas</button><span style="color:#6a8290;font-size:10px;font-weight:750;margin-left:5px">VELOCIDADE</span><button class="speedbtn active" data-speed="1">1×</button><button class="speedbtn" data-speed="2">2×</button><button class="speedbtn" data-speed="4">4×</button></div></details>
+      <details class="simulation-tools"><summary>Ferramentas da simulação</summary><div class="simulation-actions"><button id="pause" class="btn primary">Ⅱ &nbsp; Pausar</button><button id="addCars" class="btn">+ 5 entradas</button><button id="removeCars" class="btn">− 5 saídas</button><span style="color:#6a8290;font-size:10px;font-weight:750;margin-left:5px">VELOCIDADE</span><button class="speedbtn active" data-speed="1">1×</button><button class="speedbtn" data-speed="2">2×</button><button class="speedbtn" data-speed="4">4×</button><button class="speedbtn" type="button" id="qualityButton" title="Escolher qualidade de renderiza&ccedil;&atilde;o e desempenho">Render: autom&aacute;tico</button></div></details>
     </div>
     <aside class="card side"><div class="sidetop"><h2>Ocupação por piso</h2><small>Selecione para visualizar</small></div><div class="tinyheading">PAVIMENTOS · 120 VAGAS CADA</div><div class="levelRows" id="levelRows"></div><div class="tinyheading" id="sectorHeading">SETORIZAÇÃO DO PISO G1</div><div class="sectorlist" id="sectorList"></div><div class="divider"></div><div class="tinyheading" style="margin-top:17px;margin-bottom:0">CONSULTA DE VAGA</div><div class="detail" id="detail"></div><div class="side-foot"><div class="side-foot-row"><span>Tarifa aplicada</span><strong id="sideRate">R$ 5,00 / h</strong></div><div class="side-foot-row"><span>Receita acumulada</span><strong id="sideRevenue">R$ 0,00</strong></div><div class="side-foot-note">Valores e ocupação demonstrativos. Sem conexão com sensores ou sistema de pagamento.</div></div></aside>
   </section>
@@ -158,7 +158,8 @@
 <script>
 
 (()=>{'use strict';
-const $=id=>document.getElementById(id), canvas=$('scene'), ctx=canvas.getContext('2d'), stage=$('stage');
+const $=id=>document.getElementById(id), canvas=$('scene'), stage=$('stage');
+let ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
 const W=214,H=128, X0=12,SLOTW=4.92,SLOTD=8.15,COLSTEP=61.0,BANDSTEP=48.8,Y0=20.5,LANE=11.7, ROADX=200.6;
 const palette=['#e58b46','#83ac69','#f1eee3','#466d97','#ac524e','#d6b46a','#537d82','#b2b7bd','#363f47','#c5a993','#9a9eae','#4e7754','#da783e','#dedad2','#6f647c','#aabccc'];
 // Vehicle collection: hand-built, low-poly 3D geometry rendered with an orthographic projector.
@@ -187,6 +188,12 @@ function makeVehicleMesh(model,color,full){
  // Contact shadow and graphite undertray
  f([at(-hw-.38,rear-.29,.055),at(hw+.41,rear-.29,.055),at(hw+.41,front+.25,.055),at(-hw-.38,front+.25,.055)],'#09121c51');
  f([at(-hw*.90,rear,.31),at(hw*.90,rear,.31),at(hw*.90,front,.31),at(-hw*.90,front,.31)],'#192127');
+ // Three-dimensional wheel arches and a layered underbody bring out the vehicle silhouette.
+ for(const sign of [-1,1]){
+  const x=sign*(hw*.88),ax=sign*(hw+.045);
+  f([at(x,rear+.16,.36),at(x,front-.16,.36),at(ax,front-.22,.49),at(ax,rear+.22,.49)],'#202c32');
+ }
+
  // Pressed-steel lower body: two-tone sections, separate front and rear panels.
  for(const sign of [-1,1]){
    let x=sign*hw,c=sign>0?shade:shade2;
@@ -209,6 +216,13 @@ function makeVehicleMesh(model,color,full){
  // Bonnet and rear deck. Their dimensions change markedly with the model.
  f([at(-hw,cf,belt),at(hw,cf,belt),at(hw,front-.05,belt-.08),at(-hw,front-.05,belt-.08)],light,outline);
  f([at(-hw,rear+.05,belt-.07),at(hw,rear+.05,belt-.07),at(hw,cr,belt),at(-hw,cr,belt)],shade,outline);
+ // Shaped bonnet creases: reflected light on the metal, not a flat top sticker.
+ f([at(-hw*.75,cf+.18,belt+.016),at(-hw*.56,front-.29,belt-.057),at(-hw*.48,front-.32,belt-.047),at(-hw*.65,cf+.12,belt+.019)],tint(color,.35),null,false);
+ f([at(hw*.56,cf+.18,belt+.013),at(hw*.71,cf+.18,belt+.012),at(hw*.59,front-.30,belt-.053),at(hw*.52,front-.30,belt-.050)],tint(color,-.05),null,false);
+ if(!m.van){
+  f([at(-hw*.52,rear+.20,belt+.010),at(hw*.52,rear+.20,belt+.010),at(hw*.54,cr-.13,belt+.024),at(-hw*.54,cr-.13,belt+.024)],tint(color,.10));
+ }
+
  // A-pillar / C-pillar cabin shape and real separate glazing planes.
  f([at(-bt,cr,belt+.05),at(-rt,rr,roof-.12),at(-rt,rf,roof-.12),at(-bt,cf,belt+.05)],shade);
  f([at(bt,cr,belt+.05),at(rt,rr,roof-.12),at(rt,rf,roof-.12),at(bt,cf,belt+.05)],light);
@@ -219,6 +233,10 @@ function makeVehicleMesh(model,color,full){
  f([at(-rt,rr,roof-.08),at(-rt,rf,roof-.08),at(-rt*.96,rf,roof),at(-rt*.96,rr,roof)],light);
  f([at(rt,rr,roof-.08),at(rt,rf,roof-.08),at(rt*.96,rf,roof),at(rt*.96,rr,roof)],shade);
  f([at(-rt*.96,rr,roof),at(rt*.96,rr,roof),at(rt*.96,rf,roof),at(-rt*.96,rf,roof)],top);
+ // Clearcoat highlights and delicate seam along the roofline.
+ f([at(-rt*.79,rr+.10,roof+.004),at(-rt*.59,rr+.10,roof+.004),at(-rt*.63,rf-.10,roof+.004),at(-rt*.79,rf-.10,roof+.004)],'#ffffff2f');
+ f([at(rt*.71,rr+.13,roof+.006),at(rt*.77,rr+.13,roof+.006),at(rt*.77,rf-.13,roof+.006),at(rt*.71,rf-.13,roof+.006)],'#162f3a1c');
+
  // Windows split into door glass and quarter windows with body-colour B-pillars.
  for(const sign of [-1,1]){
    const low=t=>at(sign*bt,(cr+(cf-cr)*t),belt+.105);
@@ -230,6 +248,13 @@ function makeVehicleMesh(model,color,full){
      f([low(a),high(a),high(b),low(b)],n===0?winSide:win,'#5b7785');
      if(full){let p1=high(a+.08),p2=high(Math.min(b-.03,a+.22)),p3=low(a+.14);f([p1,p2,p3],'#66818d35')}
    }
+   // Glass reflections are angular, so the body reads as glazing rather than paint.
+   const gl1=at(sign*(bt*.993),cr+(cf-cr)*.30,belt+.165);
+   const gl2=at(sign*(rt*.99),rr+(rf-rr)*.34,roof-.205);
+   const gl3=at(sign*(rt*.99),rr+(rf-rr)*.53,roof-.205);
+   const gl4=at(sign*(bt*.993),cr+(cf-cr)*.49,belt+.165);
+   f([gl1,gl2,gl3,gl4],'#8dc4cf35');
+
    // Belt trim, door seals, and door handles.
    const x=sign*(hw+.022);
    f([at(x,cr,belt-.07),at(x,cf,belt-.07),at(x,cf,belt-.036),at(x,cr,belt-.036)],outline);
@@ -241,6 +266,10 @@ function makeVehicleMesh(model,color,full){
      f([at(x,yy-.16,belt-.16),at(x,yy+.19,belt-.16),at(x,yy+.19,belt-.115),at(x,yy-.16,belt-.115)],'#1e2b30');
      f([at(x+sign*.018,yy-.11,belt-.14),at(x+sign*.018,yy+.08,belt-.14),at(x+sign*.018,yy+.08,belt-.125),at(x+sign*.018,yy-.11,belt-.125)],'#a4b2b1',null,true);
    }
+    // A sculpted shoulder, sill and wheel-well trim catch light from opposite sides.
+    f([at(x,rear+.13,belt-.30),at(x,front-.22,belt-.30),at(x,front-.23,belt-.23),at(x,rear+.13,belt-.23)],sign>0?tint(color,.20):tint(color,-.16));
+    f([at(x,rear+.24,.42),at(x,front-.24,.42),at(x,front-.24,.46),at(x,rear+.24,.46)],'#1d3039');
+
    f([at(x,rear+.23,.68),at(x,front-.22,.68),at(x,front-.22,.705),at(x,rear+.23,.705)],tint(color,-.33),null,true);
    // Angular door mirror with matte-black stem and one reflective surface.
    let xm=sign*(hw+.20),ym=cf-.20;
@@ -249,6 +278,10 @@ function makeVehicleMesh(model,color,full){
    // Position lamps on front fenders.
    f([at(x,front-.43,belt-.21),at(x,front-.25,belt-.21),at(x,front-.25,belt-.11),at(x,front-.43,belt-.11)],'#e6b16f');
  }
+ // Tapered windscreen glint follows the glass plane and shifts between models.
+ f([at(-bt*.74,cf-.02,belt+.12),at(-bt*.58,cf-.02,belt+.12),at(-rt*.27,rf-.08,roof-.12),at(-rt*.49,rf-.08,roof-.12)],'#a4dce143');
+ if(full)f([at(rt*.38,rr+.16,roof+.015),at(rt*.47,rr+.16,roof+.015),at(rt*.47,rf-.14,roof+.015),at(rt*.38,rf-.14,roof+.015)],'#f3f7ea3d');
+
  // Windshield lower gasket and two wipers.
  f([at(-bt*.94,cf+.008,belt+.045),at(bt*.94,cf+.008,belt+.045),at(bt*.91,cf-.04,belt+.070),at(-bt*.91,cf-.04,belt+.070)],'#18292f');
  for(let sg of [-1,1])f([at(sg*.08,cf+.01,belt+.065),at(sg*bt*.75,cf+.01,belt+.065),at(sg*bt*.75,cf-.025,belt+.09),at(sg*.08,cf-.025,belt+.09)],'#152a31',null,true);
@@ -270,6 +303,19 @@ function makeVehicleMesh(model,color,full){
  }
  f([at(-hw*.29,fy+.03,.52),at(hw*.29,fy+.03,.52),at(hw*.29,fy+.03,.68),at(-hw*.29,fy+.03,.68)],'#e5e9e5');
  f([at(-hw*.30,ry-.02,.58),at(hw*.30,ry-.02,.58),at(hw*.30,ry-.02,.75),at(-hw*.30,ry-.02,.75)],'#44535b');
+ // Distinctive daylight running lights, grille metallic strips and rear lamp clusters.
+ for(const sign of [-1,1]){
+  const inner=sign<0?-hw+.22:hw-.73,outer=inner+.51;
+  f([at(inner,fy+.028,1.16),at(outer,fy+.028,1.16),at(outer,fy+.028,1.205),at(inner,fy+.028,1.205)],'#f9ffff');
+  f([at(inner,ry-.026,1.12),at(outer,ry-.026,1.12),at(outer,ry-.026,1.25),at(inner,ry-.026,1.25)],'#ef6563');
+  f([at(inner+.09,ry-.028,1.14),at(outer-.07,ry-.028,1.14),at(outer-.07,ry-.028,1.185),at(inner+.09,ry-.028,1.185)],'#ff9b85');
+ }
+ for(let j=0;j<3;j++){
+  const z=.85+j*.075;
+  f([at(-hw*.48,fy+.044,z),at(hw*.48,fy+.044,z),at(hw*.48,fy+.044,z+.017),at(-hw*.48,fy+.044,z+.017)],'#879fa5');
+ }
+ f([at(-hw*.23,fy+.044,.55),at(hw*.23,fy+.044,.55),at(hw*.23,fy+.044,.71),at(-hw*.23,fy+.044,.71)],'#f4f6e8');
+
  // Large separate bumper inserts, not shiny modern concept-car fascia.
  for(const y of [front+.13,rear-.13]){
    f([at(-hw-.09,y-.11,.33),at(hw+.09,y-.11,.33),at(hw+.09,y+.11,.33),at(-hw-.09,y+.11,.33)],'#2c343b');
@@ -301,6 +347,17 @@ function makeVehicleMesh(model,color,full){
    }
    for(let k=-1;k<=1;k++)f([at(k*.52-.035,rr+.20,roof+.016),at(k*.52+.035,rr+.20,roof+.016),at(k*.52+.035,rf-.18,roof+.016),at(k*.52-.035,rf-.18,roof+.016)],tint(color,-.05),null,true)
  }
+ // Proportional detailing differs by vehicle shape (utility, passenger and delivery).
+ if(m.rails||m.bed){
+  for(const sign of [-1,1]){
+   const xx=sign*(hw+.055);
+   f([at(xx,rear+.19,.50),at(xx,front-.18,.50),at(xx,front-.18,.63),at(xx,rear+.19,.63)],'#29343c');
+  }
+ }
+ if(m.van){
+  f([at(-hw*.58,front+.016,.85),at(hw*.58,front+.016,.85),at(hw*.58,front+.016,.93),at(-hw*.58,front+.016,.93)],'#e8e4d6');
+ }
+
  // Wheels: discs on the genuine vertical side planes, not flat roof stickers.
  const n=full?13:9;
  for(const sign of [-1,1])for(const yy of [rear+L*.20,front-L*.20]){
@@ -313,8 +370,8 @@ function makeVehicleMesh(model,color,full){
    f(circle(r*.61,outer+sign*.023),'#bbc4c6');
    f(circle(r*.44,outer+sign*.045),'#899aa3');
    if(full)for(let i=0;i<6;i++){
-     let a=i*Math.PI/3+.12,b=a+.29;const vx=outer+sign*.066;
-     f([at(vx,yy+Math.cos(a)*r*.14,z+Math.sin(a)*r*.14),at(vx,yy+Math.cos(b)*r*.15,z+Math.sin(b)*r*.15),at(vx,yy+Math.cos(b)*r*.53,z+Math.sin(b)*r*.53),at(vx,yy+Math.cos(a)*r*.53,z+Math.sin(a)*r*.53)],'#e6ebea');
+     let a=i*Math.PI*2/(full?7:4)+.12,b=a+.20;const vx=outer+sign*.066;
+     f([at(vx,yy+Math.cos(a)*r*.14,z+Math.sin(a)*r*.14),at(vx,yy+Math.cos(b)*r*.15,z+Math.sin(b)*r*.15),at(vx,yy+Math.cos(b)*r*.53,z+Math.sin(b)*r*.53),at(vx,yy+Math.cos(a)*r*.53,z+Math.sin(a)*r*.53)],'#e6ebea',null,false);
    }
    f(circle(r*.13,outer+sign*.08,7),'#59696e');
  }
@@ -334,7 +391,7 @@ function drawVehicleMesh(target,projectPoint,model,color,full=false){
  }
  target.restore();
 }
-function drawCarOnMap(cx,cy,angle,model,color){
+function drawCarOnMap(cx,cy,angle,model,color,motion=null){
  const cs=Math.cos(angle),sn=Math.sin(angle),yaw=cam.yaw,cyaw=Math.cos(yaw),syaw=Math.sin(yaw);
  drawVehicleMesh(ctx,p=>{
   const x=cx+cs*p[0]+sn*p[1],y=cy+sn*p[0]-cs*p[1];const screen=project(x,y,p[2]);
@@ -342,6 +399,27 @@ function drawCarOnMap(cx,cy,angle,model,color){
   return {x:screen.x,y:screen.y,depth:rx+ry+p[2]*1.1};
  },model,color,false);
 }
+function drawMotionLighting(cx,cy,angle,model,motion){
+ // Compact local effects: moving tail lamps and subtle ground light; no texture or GPU dependency.
+ const m=CAR_DEFS[model]||CAR_DEFS.Hatch,cs=Math.cos(angle),sn=Math.sin(angle);
+ const rear=-m.length/2-.09,front=m.length/2+.05;
+ function light(x,y,z,r,c){
+  const p=project(cx+cs*x+sn*y,cy+sn*x-cs*y,z),radius=Math.max(1.1,viewScale()*r);
+  if(p.x<-20||p.x>dims.w+20||p.y<-20||p.y>dims.h+20)return;
+  const grad=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,radius);
+  grad.addColorStop(0,c);grad.addColorStop(1,'#ffffff00');
+  ctx.fillStyle=grad;ctx.beginPath();ctx.arc(p.x,p.y,radius,0,Math.PI*2);ctx.fill();
+ }
+ ctx.save();
+ if(mode==='3d'){
+  for(let side of [-1,1]){
+   light(side*m.width*.36,front,.97,.85,'#f7f5da90');
+   light(side*m.width*.34,rear,.98,motion.blocked||motion.velocity<2?2.5:1.3,motion.blocked||motion.velocity<2?'#fa5b65c0':'#f4727255');
+  }
+ }
+ ctx.restore();
+}
+
 function paintCarCanvas(canvas,model,color,angle){
  if(!canvas)return;
  const box=canvas.getBoundingClientRect(),width=Math.max(45,box.width),height=Math.max(45,box.height),dpr=Math.min(2,window.devicePixelRatio||1);
@@ -416,7 +494,29 @@ const floorNames=['G1','G2','G3']; const sectorNames='ABCDEF';
 let ledger=[],auditTrail=[],shiftSnapshots=[],financeLimit=(innerWidth<=760?4:8),auditLimit=(innerWidth<=760?4:8),demoRole='Supervisor',selectedTransactionId=null,lastToastTimer=null;
 let floors=[], moving=[], logs=[], hist=[], histFloors=[[],[],[]], trackLimit=(window.innerWidth<=760?6:12), activeFloor=0, selected=null, hovered=null, paused=false, speed=1, mode='3d', simtime=0, lastFrame=0, lastSpawn=0, lastChart=0, arrivals=0, departures=0, initialized=false;
 let locationActive=false, locationSlot=null, locationPreviousMode='3d';
+// Static scenery is rasterized once per change, not for every animation frame.
+const staticLayer=document.createElement('canvas'),staticCtx=staticLayer.getContext('2d');
+const lowPowerDevice=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
+let qualityMode='auto', staticRevision=0, staticKey='', physicsAccumulator=0, clockSecond=-1;
+const renderStats={cacheBuilds:0,paintedFrames:0,lastPaintMs:0,lastBuildMs:0};
+const economyEnabled=()=>qualityMode==='economy'||(qualityMode==='auto'&&lowPowerDevice);
+const frameInterval=()=>qualityMode==='quality'?1000/45:economyEnabled()?1000/25:1000/38;
+const pixelRatio=()=>Math.min(window.devicePixelRatio||1,qualityMode==='quality'?1.8:economyEnabled()?1.15:1.45);
 let lastRender=0;let cam={zoom:1,yaw:0,panX:0,panY:0}, dims={w:950,h:570,dpr:1}, drawnHit=[], drag={down:false,moved:false,x:0,y:0,lx:0,ly:0};
+// A small spatial index avoids scanning 120 parking slots on every collision probe.
+const GRID_SIZE=16, GRID_COLS=Math.ceil((W+16)/GRID_SIZE), GRID_ROWS=Math.ceil((H+16)/GRID_SIZE);
+let collisionBuckets=[];
+function buildCollisionBuckets(){
+ collisionBuckets=floors.map(f=>{
+  const buckets=[];
+  for(const slot of f.slots){
+   const col=Math.floor(slot.cx/GRID_SIZE),row=Math.floor(slot.cy/GRID_SIZE),key=row*GRID_COLS+col;
+   (buckets[key]||(buckets[key]=[])).push(slot);
+  }
+  return buckets;
+ });
+}
+
 let seed=102938;function rng(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}function rand(a,b){return a+(b-a)*rng()}function choice(a){return a[Math.floor(rng()*a.length)]}
 function occ(){return floors.reduce((n,f)=>n+f.slots.filter(s=>s.occupied).length,0)}function slotsFloor(f){return floors[f].slots}function occupiedFloor(f){return slotsFloor(f).filter(s=>s.occupied).length}function reservedFloor(f){return slotsFloor(f).filter(s=>s.reserved&&!s.occupied).length}function availableFloor(f){return 120-occupiedFloor(f)-reservedFloor(f)}
 function slotKind(col,bank,j){if(j===0&&col===0)return 'Acessível';if(j>=8&&col===2)return 'Elétrica';return 'Convencional'}
@@ -437,7 +537,7 @@ function tooltipMarkup(s){
 }
 function refreshHover(){if(hovered&&hovered.floor===activeFloor){$('hover').innerHTML=tooltipMarkup(hovered)}else{$('hover').style.display='none'}}
 function positionHover(x,y){const w=stage.clientWidth,h=stage.clientHeight,tip=$('hover');const bw=tip.offsetWidth||296,bh=tip.offsetHeight||230;let left=x+18;if(left+bw+10>w)left=x-bw-18;left=Math.max(10,Math.min(left,w-bw-10));let below=y+15,above=y-bh-15,top=below+bh+10<=h?below:above>=10?above:y-bh*.5;top=Math.max(10,Math.min(top,h-bh-10));tip.style.left=Math.round(left)+'px';tip.style.top=Math.round(top)+'px'}
-function init(){floors=[];moving=[];logs=[];hist=[];histFloors=[[],[],[]];arrivals=0;departures=0;revenue=0;paidTickets=0;simtime=0;lastSpawn=0;lastChart=0;cam={zoom:1,yaw:0,panX:0,panY:0};selected=null;for(let f=0;f<3;f++){let slots=[];for(let band=0;band<2;band++)for(let col=0;col<3;col++)for(let bank=0;bank<2;bank++)for(let j=0;j<10;j++){const section=band*3+col;let x=X0+col*COLSTEP+j*SLOTW, y=Y0+band*BANDSTEP+bank*(SLOTD+LANE);let s={floor:f,sector:section,bank,j,number:bank*10+j+1,x,y,cx:x+SLOTW/2,cy:y+SLOTD/2,w:SLOTW,d:SLOTD,kind:slotKind(col,bank,j),id:`G${f+1}-${sectorNames[section]}${String(bank*10+j+1).padStart(2,'0')}`,occupied:false,reserved:false,departing:false,car:null,duration:0};let rate=[.79,.66,.54][f]+(s.kind==='Acessível'?.02:0);if(rng()<rate){s.occupied=true;s.car=randomCar();s.duration=Math.floor(rand(5,170))}slots.push(s)}floors.push({slots})}for(let i=0;i<17;i++){hist.push(Math.min(100,Math.max(0,occ()/360*100+rand(-2,2))));for(let f=0;f<3;f++)histFloors[f].push(Math.min(100,Math.max(0,occupiedFloor(f)/120*100+rand(-2.5,2.5))))}hist[hist.length-1]=occ()/360*100;for(let f=0;f<3;f++)histFloors[f][histFloors[f].length-1]=occupiedFloor(f)/120*100;addLog('info','Monitoramento iniciado','360 vagas em 3 pisos · modo demonstração');for(let f=2;f>=0;f--){const n=occupiedFloor(f);addLog('info',`Piso G${f+1} · ${n} vagas ocupadas`,`${120-n} vagas disponíveis · leitura inicial`)} addLog('info','Regra tarifária ativa',money(tariff)+' por hora ou fração · demonstração');seedFinancialHistory();addAudit('config','Cenário demonstrativo carregado','Cobranças fictícias pré-geradas, 360 vagas e dados locais não persistentes.','Sistema');syncUI();drawChart();initialized=true}
+function init(){floors=[];moving=[];logs=[];hist=[];histFloors=[[],[],[]];arrivals=0;departures=0;revenue=0;paidTickets=0;simtime=0;lastSpawn=0;lastChart=0;cam={zoom:1,yaw:0,panX:0,panY:0};selected=null;for(let f=0;f<3;f++){let slots=[];for(let band=0;band<2;band++)for(let col=0;col<3;col++)for(let bank=0;bank<2;bank++)for(let j=0;j<10;j++){const section=band*3+col;let x=X0+col*COLSTEP+j*SLOTW, y=Y0+band*BANDSTEP+bank*(SLOTD+LANE);let s={floor:f,sector:section,bank,j,number:bank*10+j+1,x,y,cx:x+SLOTW/2,cy:y+SLOTD/2,w:SLOTW,d:SLOTD,kind:slotKind(col,bank,j),id:`G${f+1}-${sectorNames[section]}${String(bank*10+j+1).padStart(2,'0')}`,occupied:false,reserved:false,departing:false,inMotion:false,car:null,duration:0};let rate=[.79,.66,.54][f]+(s.kind==='Acessível'?.02:0);if(rng()<rate){s.occupied=true;s.car=randomCar();s.duration=Math.floor(rand(5,170))}slots.push(s)}floors.push({slots})}buildCollisionBuckets();staticRevision++;for(let i=0;i<17;i++){hist.push(Math.min(100,Math.max(0,occ()/360*100+rand(-2,2))));for(let f=0;f<3;f++)histFloors[f].push(Math.min(100,Math.max(0,occupiedFloor(f)/120*100+rand(-2.5,2.5))))}hist[hist.length-1]=occ()/360*100;for(let f=0;f<3;f++)histFloors[f][histFloors[f].length-1]=occupiedFloor(f)/120*100;addLog('info','Monitoramento iniciado','360 vagas em 3 pisos · modo demonstração');for(let f=2;f>=0;f--){const n=occupiedFloor(f);addLog('info',`Piso G${f+1} · ${n} vagas ocupadas`,`${120-n} vagas disponíveis · leitura inicial`)} addLog('info','Regra tarifária ativa',money(tariff)+' por hora ou fração · demonstração');seedFinancialHistory();addAudit('config','Cenário demonstrativo carregado','Cobranças fictícias pré-geradas, 360 vagas e dados locais não persistentes.','Sistema');syncUI();drawChart();initialized=true}
 function fmt(n){return Math.round(n).toLocaleString('pt-BR')}function timeStr(){return new Date().toLocaleTimeString('pt-BR',{hour12:false})}function addLog(type,title,sub){
  logs.unshift({type,title,sub,time:timeStr()});logs=logs.slice(0,30);
  $('activity').innerHTML=logs.map(a=>`<div class="log"><div class="logIcon ${a.type}">${a.type==='exit'?'↗':a.type==='info'?'◇':'↘'}</div><div class="logtxt"><b>${a.title}</b><small>${a.sub}</small></div><span class="logtime">${a.time}</span></div>`).join('');
@@ -454,7 +554,7 @@ function syncUI(){
  $('mFree').textContent=fmt(free);$('mFreePct').textContent=(free/360*100).toLocaleString('pt-BR',{maximumFractionDigits:1})+'%';
  $('mOccupied').textContent=pct.toLocaleString('pt-BR',{maximumFractionDigits:1})+'%';$('mBar').style.width=pct+'%';
  $('mParked').textContent=fmt(busy);$('mAging').textContent=fmt(aging);$('mReceivable').textContent=money(projected);
- $('mMoving').textContent=String(moving.length);$('mManeuvers').textContent=moving.filter(v=>v.floor===activeFloor).length+' carros';
+ $('mMoving').textContent=String(moving.filter(v=>v.state==='driving').length);$('mQueued').textContent=String(moving.filter(v=>v.state==='queued').length);$('mManeuvers').textContent=moving.filter(v=>v.floor===activeFloor).length+' carros';
  $('maneuverSub').textContent='No piso G'+(activeFloor+1);$('mArrivals').textContent=String(arrivals);$('mDepartures').textContent=String(departures);
  $('floorLabel').textContent=`PISO G${activeFloor+1} / ${mode==='3d'?'3D ISOMÉTRICO':'PLANTA SUPERIOR'}`;
  $('floorSub').textContent=`120 vagas · 6 setores · ${availableFloor(activeFloor)} livres`;
@@ -522,14 +622,194 @@ function locateOnMap(slot){
 }
 function setFloor(i){if(i===activeFloor)return;hideLocation();activeFloor=i;selected=null;hovered=null;$('hover').style.display='none';cam={zoom:1,yaw:0,panX:0,panY:0};document.querySelectorAll('#floors button').forEach(b=>b.classList.toggle('active',+b.dataset.floor===i));syncUI();draw()}
 function setMode(m){mode=m;$('isoBtn').classList.toggle('active',m==='3d');$('topBtn').classList.toggle('active',m==='2d');cam={zoom:locationActive?(dims.w<520?2.50:2.08):1,yaw:0,panX:0,panY:0};if(locationActive)centerOnLocation();syncUI();draw()}
-function sampleRoute(points){let list=[points[0]];for(let i=1;i<points.length-1;i++){const a=points[i-1],b=points[i],c=points[i+1],len1=Math.hypot(b[0]-a[0],b[1]-a[1]),len2=Math.hypot(c[0]-b[0],c[1]-b[1]);if(len1<.01||len2<.01)continue;let r=Math.min(4.5,len1*.30,len2*.32),p=[b[0]-(b[0]-a[0])/len1*r,b[1]-(b[1]-a[1])/len1*r],q=[b[0]+(c[0]-b[0])/len2*r,b[1]+(c[1]-b[1])/len2*r];list.push(p);for(let k=1;k<=7;k++){let t=k/7;list.push([(1-t)*(1-t)*p[0]+2*(1-t)*t*b[0]+t*t*q[0],(1-t)*(1-t)*p[1]+2*(1-t)*t*b[1]+t*t*q[1]])}}list.push(points[points.length-1]);let dist=[0];for(let i=1;i<list.length;i++)dist[i]=dist[i-1]+Math.hypot(list[i][0]-list[i-1][0],list[i][1]-list[i-1][1]);return {list,dist,total:dist[dist.length-1]}}
-function routeFor(s,type){let cy0=Y0+Math.floor(s.sector/3)*BANDSTEP,aisle=cy0+SLOTD+LANE/2; if(type==='arrival')return sampleRoute([[216,119],[ROADX,119],[ROADX,aisle],[s.cx+8,aisle],[s.cx,aisle],[s.cx,s.cy]]);return sampleRoute([[s.cx,s.cy],[s.cx,aisle],[s.cx+8,aisle],[ROADX,aisle],[ROADX,119],[218,119]])}
-function routePosition(r,d){d=Math.max(0,Math.min(d,r.total));let k=1;while(k<r.dist.length-1&&r.dist[k]<d)k++;let prev=r.list[k-1],next=r.list[k],t=(d-r.dist[k-1])/Math.max(.001,r.dist[k]-r.dist[k-1]);return {x:prev[0]+(next[0]-prev[0])*t,y:prev[1]+(next[1]-prev[1])*t,angle:Math.atan2(next[0]-prev[0],-(next[1]-prev[1]))}}
-function spawn(type,n=1,floor=activeFloor,manual=false){let list=slotsFloor(floor).filter(s=>type==='arrival'?!s.occupied&&!s.reserved: s.occupied&&!s.departing);if(!list.length)return 0;let created=0;for(let i=0;i<n&&list.length;i++){let index=Math.floor(rng()*list.length),s=list.splice(index,1)[0];let car=type==='arrival'?randomCar():s.car;if(type==='arrival'){s.reserved=true;s.car=car}else{s.departing=true}let route=routeFor(s,type);moving.push({type,slot:s,floor,car,route,dist:0,speed:rand(18,25),x:route.list[0][0],y:route.list[0][1],angle:type==='departure'?(s.bank===0?0:Math.PI):0});created++}if(created){if(type==='arrival')addLog('entry',`${created} veículo${created>1?'s':''} na entrada`,`Piso G${floor+1} · direcionamento automático`);else addLog('exit',`${created} veículo${created>1?'s':''} deixando vagas`,`Piso G${floor+1} · fluxo de saída`);if(manual)addAudit('simulation',type==='arrival'?'Entrada acionada manualmente':'Saída acionada manualmente',`${created} veículo(s) · piso G${floor+1}`);syncUI()}return created}
-function updateMotion(dt){let changed=false;for(let i=moving.length-1;i>=0;i--){const m=moving[i];m.dist+=dt*m.speed;let p=routePosition(m.route,m.dist);m.x=p.x;m.y=p.y;let reverse=m.type==='departure'&&m.dist<Math.abs(m.slot.cy-(Y0+Math.floor(m.slot.sector/3)*BANDSTEP+SLOTD+LANE/2))*.72;if(reverse)m.angle=m.slot.bank===0?0:Math.PI;else m.angle=p.angle;if(m.dist>=m.route.total){if(m.type==='arrival'){m.slot.occupied=true;m.slot.reserved=false;m.slot.duration=0;arrivals++}else{
- const tx=recordExit(m.slot);
- addLog('exit',tx.status==='paid'?'Saída · '+money(tx.net):'Saída · pagamento pendente',`Vaga ${m.slot.id} · ${stayLabel(m.slot.duration)} · ${tx.ticket}`);
- m.slot.occupied=false;m.slot.departing=false;m.slot.car=null;m.slot.duration=0;departures++} moving.splice(i,1);changed=true}}if(changed){syncUI();if(selected)syncMapFeature()}}
+// Spatial traffic controller: separate one-way lanes, queued jobs and hard vehicle clearance.
+// All coordinates are in map units; no back-end or external traffic service is required.
+const TRAFFIC={incomingX:205.5,outgoingX:195.4,laneOffset:2.85,maxPerBand:1,maxPerFloor:2,parkSpeed:10.5,clearance:.38};
+let trafficStops=0;
+function sampleRoute(points){
+ let list=[points[0]];
+ for(let i=1;i<points.length-1;i++){
+  const a=points[i-1],b=points[i],c=points[i+1],l1=Math.hypot(b[0]-a[0],b[1]-a[1]),l2=Math.hypot(c[0]-b[0],c[1]-b[1]);
+  if(l1<.01||l2<.01)continue;
+  const r=Math.min(5,l1*.33,l2*.33),u=[b[0]-(b[0]-a[0])/l1*r,b[1]-(b[1]-a[1])/l1*r],v=[b[0]+(c[0]-b[0])/l2*r,b[1]+(c[1]-b[1])/l2*r];
+  list.push(u);
+  for(let k=1;k<=10;k++){let t=k/10;list.push([(1-t)*(1-t)*u[0]+2*(1-t)*t*b[0]+t*t*v[0],(1-t)*(1-t)*u[1]+2*(1-t)*t*b[1]+t*t*v[1]])}
+ }
+ list.push(points[points.length-1]);return list;
+}
+function angleBlend(a,b,t){return a+Math.atan2(Math.sin(b-a),Math.cos(b-a))*t}
+function smoothStep(t){return t*t*(3-2*t)}
+function routeFor(s,type){
+ const aisle=Y0+Math.floor(s.sector/3)*BANDSTEP+SLOTD+LANE/2;
+ const inbound=aisle-TRAFFIC.laneOffset,outbound=aisle+TRAFFIC.laneOffset;
+ const approach=5.65,face=s.bank===0?0:Math.PI;
+ const points=[];
+ function put(x,y,angle,limit,phase){
+  const old=points[points.length-1];
+  if(old&&Math.hypot(old.x-x,old.y-y)<.0005){old.angle=angle;old.limit=Math.min(old.limit,limit);return}
+  points.push({x,y,angle,limit,phase});
+ }
+ function cruise(pts,limit=22){
+  const samples=sampleRoute(pts);
+  for(let i=0;i<samples.length;i++){
+   const a=samples[Math.max(0,i-1)],b=samples[Math.min(samples.length-1,i+1)];
+   const ang=Math.atan2(b[0]-a[0],-(b[1]-a[1]));
+   put(samples[i][0],samples[i][1],ang,limit,'cruise');
+  }
+ }
+ function straight(a,b,angle,limit,phase){
+  const n=Math.max(5,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/.55));
+  for(let i=0;i<=n;i++){let t=i/n;put(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,angle,limit,phase)}
+ }
+ function maneuver(a,c1,c2,b,angle0,angle1,phase){
+  for(let i=0;i<=32;i++){
+   const t=i/32,u=1-t;
+   const x=u*u*u*a[0]+3*u*u*t*c1[0]+3*u*t*t*c2[0]+t*t*t*b[0];
+   const y=u*u*u*a[1]+3*u*u*t*c1[1]+3*u*t*t*c2[1]+t*t*t*b[1];
+   put(x,y,angleBlend(angle0,angle1,smoothStep(t)),8.6,phase);
+  }
+ }
+ if(type==='arrival'){
+  const start=[TRAFFIC.incomingX,133],turn=[s.cx+approach,inbound];
+  cruise([start,[TRAFFIC.incomingX,inbound+6],[TRAFFIC.incomingX,inbound],[TRAFFIC.incomingX-5.4,inbound],turn],20.8);
+  maneuver(turn,[s.cx+approach-2.7,inbound],[s.cx,aisle+(s.bank===0?2.0:-2.0)],[s.cx,aisle],-Math.PI/2,s.bank===0?0:-Math.PI,'parking');
+  straight([s.cx,aisle],[s.cx,s.cy],s.bank===0?0:-Math.PI,TRAFFIC.parkSpeed,'parking');
+ }else{
+  straight([s.cx,s.cy],[s.cx,aisle],face,TRAFFIC.parkSpeed,'reverse');
+  maneuver([s.cx,aisle],[s.cx,aisle+(s.bank===0?2.0:-2.0)],[s.cx+approach-2.7,outbound],[s.cx+approach,outbound],face,Math.PI/2,'parking');
+  cruise([[s.cx+approach,outbound],[TRAFFIC.outgoingX-5,outbound],[TRAFFIC.outgoingX,outbound],[TRAFFIC.outgoingX,outbound+6],[TRAFFIC.outgoingX,133]],20.2);
+ }
+ let total=0;const lengths=[0];
+ for(let i=1;i<points.length;i++){
+  total+=Math.hypot(points[i].x-points[i-1].x,points[i].y-points[i-1].y);
+  lengths.push(total);
+ }
+ return {list:points,dist:lengths,total};
+}
+function routePosition(route,d){
+ const r=route,dists=r.dist,list=r.list;
+ d=Math.min(r.total,Math.max(0,d));
+ let lo=1,hi=dists.length-1;
+ while(lo<hi){let mid=(lo+hi)>>1;if(dists[mid]<d)lo=mid+1;else hi=mid}
+ const i=Math.max(1,lo),a=list[i-1],b=list[i],t=(d-dists[i-1])/Math.max(.00001,dists[i]-dists[i-1]);
+ return {x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,angle:angleBlend(a.angle,b.angle,t),limit:Math.min(a.limit,b.limit),phase:b.phase};
+}
+// Separating axis theorem with physical vehicle footprints and a small safety envelope.
+function vehicleOverlap(a,b,clearance=TRAFFIC.clearance){
+ const ma=CAR_DEFS[a.car.model]||CAR_DEFS.Hatch,mb=CAR_DEFS[b.car.model]||CAR_DEFS.Hatch;
+ const dx=b.x-a.x,dy=b.y-a.y,near=(ma.length+mb.length)*.5+clearance+1;
+ if(dx*dx+dy*dy>near*near)return false;
+ const aw=ma.width/2+clearance/2,al=ma.length/2+clearance/2,bw=mb.width/2+clearance/2,bl=mb.length/2+clearance/2;
+ const ac=Math.cos(a.angle),as=Math.sin(a.angle),bc=Math.cos(b.angle),bs=Math.sin(b.angle);
+ const axes=[[ac,as],[as,-ac],[bc,bs],[bs,-bc]];
+ for(const [ux,uy] of axes){
+  const r1=aw*Math.abs(ux*ac+uy*as)+al*Math.abs(ux*as-uy*ac);
+  const r2=bw*Math.abs(ux*bc+uy*bs)+bl*Math.abs(ux*bs-uy*bc);
+  if(Math.abs(ux*dx+uy*dy)>=r1+r2)return false;
+ }
+ return true;
+}
+function freeOfCollisions(m,pos){
+ const candidate={x:pos.x,y:pos.y,angle:pos.angle,car:m.car};
+ for(const other of moving){
+  if(other===m||other.floor!==m.floor||other.state!=='driving')continue;
+  if(vehicleOverlap(candidate,other,.88))return false;
+ }
+ const def=CAR_DEFS[m.car.model]||CAR_DEFS.Hatch;
+ const buckets=collisionBuckets[m.floor],gx=Math.floor(pos.x/GRID_SIZE),gy=Math.floor(pos.y/GRID_SIZE);
+ for(let y=Math.max(0,gy-1);y<=Math.min(GRID_ROWS-1,gy+1);y++){
+  for(let x=Math.max(0,gx-1);x<=Math.min(GRID_COLS-1,gx+1);x++){
+   const bucket=buckets[y*GRID_COLS+x];if(!bucket)continue;
+   for(const slot of bucket){
+    if(slot===m.slot||!slot.occupied||!slot.car||slot.inMotion)continue;
+    if(Math.abs(slot.cx-pos.x)>def.length+3.9||Math.abs(slot.cy-pos.y)>def.length+4.1)continue;
+    if(vehicleOverlap(candidate,{x:slot.cx,y:slot.cy,angle:slot.bank===0?0:Math.PI,car:slot.car},.13))return false;
+   }
+  }
+ }
+ return true;
+}
+function launchQueued(){
+ for(let f=0;f<3;f++){
+  let driving=moving.filter(v=>v.floor===f&&v.state==='driving');
+  for(const m of moving){
+   if(m.floor!==f||m.state!=='queued'||driving.length>=TRAFFIC.maxPerFloor)continue;
+   if(driving.some(v=>v.band===m.band))continue;
+   // A floor works in direction batches. Crossing flows cannot deadlock at junctions.
+   if(driving.length&&(m.type==='departure'||driving.some(v=>v.type!==m.type)))continue;
+   const pos=routePosition(m.route,0);
+   if(!freeOfCollisions(m,pos))continue;
+   m.state='driving';m.x=pos.x;m.y=pos.y;m.angle=pos.angle;
+   m.velocity=0;m.blocked=false;m.slot.inMotion=m.type==='departure';staticRevision++;driving.push(m);
+  }
+ }
+}
+function spawn(type,n=1,floor=activeFloor,manual=false){
+ const list=slotsFloor(floor).filter(s=>type==='arrival'?!s.occupied&&!s.reserved:s.occupied&&!s.departing);
+ const capacity=Math.max(0,26-moving.filter(m=>m.floor===floor).length),amount=Math.min(n,capacity);
+ let created=0;
+ for(let i=0;i<amount&&list.length;i++){
+  const index=Math.floor(rng()*list.length),s=list.splice(index,1)[0],car=type==='arrival'?randomCar():s.car;
+  if(type==='arrival'){s.reserved=true;s.car=car}else s.departing=true;
+  const route=routeFor(s,type);
+  moving.push({type,slot:s,floor,band:Math.floor(s.sector/3),car,route,dist:0,
+   state:'queued',x:null,y:null,angle:s.bank===0?0:Math.PI,velocity:0,
+   speed:rand(33,38),blocked:false});created++;
+ }
+ launchQueued();
+ if(created){
+  staticRevision++;
+  if(type==='arrival')addLog('entry',`${created} veículo${created>1?'s':''} na entrada`,`Piso G${floor+1} · fila de acesso com distâncias seguras`);
+  else addLog('exit',`${created} veículo${created>1?'s':''} aguardando saída`,`Piso G${floor+1} · liberação progressiva das manobras`);
+  if(manual)addAudit('simulation',type==='arrival'?'Entrada acionada manualmente':'Saída acionada manualmente',`${created} veículo(s) · piso G${floor+1}`);
+  syncUI();
+ }
+ return created;
+}
+function completeMotion(m){
+ m.slot.inMotion=false;staticRevision++;
+ if(m.type==='arrival'){
+  m.slot.occupied=true;m.slot.reserved=false;m.slot.duration=0;arrivals++;
+ }else{
+  const tx=recordExit(m.slot);
+  addLog('exit',tx.status==='paid'?'Saída · '+money(tx.net):'Saída · pagamento pendente',`Vaga ${m.slot.id} · ${stayLabel(m.slot.duration)} · ${tx.ticket}`);
+  m.slot.occupied=false;m.slot.departing=false;m.slot.car=null;m.slot.duration=0;departures++;
+ }
+ const index=moving.indexOf(m);if(index>=0)moving.splice(index,1);
+}
+function updateMotion(dt){
+ let changed=false;
+ // Short fixed simulation steps prevent skipping over a car at 2x/4x speed.
+ const n=Math.max(1,Math.ceil(dt/.04)),step=dt/n;
+ for(let sub=0;sub<n;sub++){
+  launchQueued();
+  const driving=moving.filter(m=>m.state==='driving').sort((a,b)=>b.dist-a.dist);
+  for(const m of driving){
+   const here=routePosition(m.route,m.dist),look=routePosition(m.route,Math.min(m.route.total,m.dist+3));
+   const target=Math.min(m.speed,here.limit,look.limit),accel=30,brake=48;
+   // Reduce speed in advance of a conflict, instead of jumping or teleporting.
+   let safeAhead=18;
+   for(let d=1.8;d<=18;d+=1.8){
+    if(!freeOfCollisions(m,routePosition(m.route,Math.min(m.route.total,m.dist+d)))){safeAhead=d-1.8;break}
+   }
+   const safeSpeed=Math.min(target,Math.sqrt(Math.max(0,2*brake*(safeAhead-.38))));
+   m.velocity+=Math.max(-brake*step,Math.min(accel*step,safeSpeed-m.velocity));
+   const stride=Math.min(m.route.total-m.dist,Math.max(0,m.velocity*step));
+   if(stride>0){
+    let possible=stride,proposal=routePosition(m.route,m.dist+possible);
+    if(!freeOfCollisions(m,proposal)){
+     let low=0,high=possible;
+     for(let j=0;j<9;j++){let mid=(low+high)/2;if(freeOfCollisions(m,routePosition(m.route,m.dist+mid)))low=mid;else high=mid}
+     possible=low;m.velocity=0;trafficStops++;
+    }
+    if(possible>.0003){m.dist+=possible;proposal=routePosition(m.route,m.dist);m.x=proposal.x;m.y=proposal.y;m.angle=proposal.angle}
+   }
+   m.blocked=safeAhead<1.5&&m.velocity<.9;
+   if(m.dist>=m.route.total-.035){completeMotion(m);changed=true}
+  }
+ }
+ if(changed){launchQueued();syncUI();if(selected)syncMapFeature()}
+}
 function project(x,y,z=0){let sx,sy,sc=viewScale();if(mode==='3d'){let dx=x-107,dy=y-57,c=Math.cos(cam.yaw),s=Math.sin(cam.yaw);let rx=dx*c-dy*s,ry=dx*s+dy*c;sx=dims.w*.5+(rx-ry)*.83*sc+cam.panX;sy=dims.h*.56+(rx+ry)*.405*sc-z*.96*sc+cam.panY}else{sx=dims.w*.5+(x-107)*sc+cam.panX;sy=dims.h*.53+(y-55)*sc-z*.15*sc+cam.panY}return {x:sx,y:sy}}
 function viewScale(){let base=mode==='3d'?Math.min(dims.w/287,dims.h/173):Math.min(dims.w/232,dims.h/143);return base*cam.zoom}
 function poly(pts,fill,stroke,linew=1){ctx.beginPath();pts.forEach((p,i)=>{let q=Array.isArray(p)?project(p[0],p[1],p[2]||0):p;if(i===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y)});ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=linew;ctx.stroke()}}
@@ -582,7 +862,8 @@ function deck(){
  // Eixos de rua legíveis tanto no mapa isométrico quanto na planta 2D.
  for(let yy of [Y0+SLOTD+LANE/2,Y0+BANDSTEP+SLOTD+LANE/2]){
   worldDash(11,yy,191,yy,5.1,5.2,'#afbebc',1.2);
-  for(let x of [27,96,166])roadArrow(x,yy-2.5,'left','#9eb1b4')
+  for(let x of [27,96,166])roadArrow(x,yy-2.5,'left','#9eb1b4');
+  for(let x of [45,113,176])roadArrow(x,yy+2.5,'right','#9eb1b4')
  }
  worldDash(14,58.9,190,58.9,6,5,'#e5c77b',1.45);
  for(let x of [42,107,171])roadArrow(x,64,'right','#aabdbb');
@@ -595,6 +876,7 @@ function deck(){
  }
  worldDash(200.75,10.5,200.75,119,6,5,'#d7cab0',1.55);
  for(let yy of [17,71,102])roadArrow(205,yy,'up','#c2d1c9');
+ for(let yy of [24,67,105])roadArrow(195.8,yy,'down','#c2d1c9');
  // Faixas de pedestres exatamente sobre os cruzamentos, sem calçadas soltas.
  for(let mid of [Y0+SLOTD+LANE/2,Y0+BANDSTEP+SLOTD+LANE/2]){
   for(let yy=mid-4.4;yy<mid+4.45;yy+=2.1)rect(185.25,yy,4.1,.85,'#d3ded6')
@@ -603,7 +885,7 @@ function deck(){
  // Acesso e rampa conectados ao piso: sinalização no asfalto, sem blocos que interrompam a rua.
  rect(193,42.5,16.8,9.4,'#405762');
  for(let k=0;k<5;k++)seg(194.7,44+k*1.35,208.1,44+k*1.35,'#dfbe76',1.4);
- txt('RAMPA',201.5,41.7,.75,'#e9f3ec',10,'850');
+ if(dims.w>=530||cam.zoom>=1.5)txt('RAMPA',201.5,41.7,.75,'#e9f3ec',10,'850');
  roadArrow(205,54.5,'up','#e9c97a');
  // Passeio contínuo do shopping e travessias ao longo da fachada.
  rect(3,1,188,8.85,'#687577');
@@ -611,13 +893,16 @@ function deck(){
  for(let x=8;x<187;x+=10)rect(x,5.1,5.4,3.0,'#e5e4d8');
  rect(-4,13,6,106,'#50645b');for(let i=0;i<8;i++)tree(-7,17+i*14);
  // Sinalização de acesso posicionada no prolongamento real da pista.
- txt('ENTRADA ↥',204.5,132,.8,'#b7efab',11,'850');
- txt('SAÍDA ↗',184,132,.8,'#ece3c7',10,'800');
+ if(dims.w>=530||cam.zoom>=1.5){
+  txt('ENTRADA ↥',204.5,132,.8,'#b7efab',11,'850');
+  txt('SAÍDA ↗',184,132,.8,'#ece3c7',10,'800');
+ }
  // Estrutura do empreendimento (fora do fluxo viário).
  box3D(13,-20,170,15,6,'#546f7c','#284355','#3b5969');
  box3D(29,-24,135,8,9,'#527785','#304c61','#456778');
  for(let i=0;i<8;i++)rect(19+i*21,-6.5,9,2,'#8be0cb',null,1);
- txt('S H O P P I N G   A U R O R A',100,-12,13,'#f5fcff',13,'800');
+ const compactLabels=dims.w<530&&cam.zoom<1.5;
+ txt(compactLabels?'SHOPPING AURORA':'S H O P P I N G   A U R O R A',100,-12,13,'#f5fcff',compactLabels?9:13,'800');
  for(let x=0;x<=W;x+=17){let p=project(x,H,1);ctx.fillStyle='#a8c7c2';ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1,viewScale()*.22),0,Math.PI*2);ctx.fill()}
 }
 function tree(x,y){let base=project(x,y,0),top=project(x,y,4.0);ctx.strokeStyle='#688278';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(base.x,base.y);ctx.lineTo(top.x,top.y);ctx.stroke();ctx.fillStyle='#356e63';ctx.beginPath();ctx.arc(top.x,top.y,Math.max(2.5,viewScale()*1.35),0,Math.PI*2);ctx.fill();ctx.fillStyle='#52917a';ctx.beginPath();ctx.arc(top.x-viewScale()*.43,top.y-viewScale()*.45,Math.max(1,viewScale()*.58),0,Math.PI*2);ctx.fill()}
@@ -625,17 +910,110 @@ function drawSpot(s){let isSelected=selected===s,occupied=s.occupied||s.reserved
 if(s.reserved&&!s.occupied){let q=project(s.cx,s.cy,.3);ctx.beginPath();ctx.arc(q.x,q.y,Math.max(2,viewScale()*.8),0,Math.PI*2);ctx.fillStyle='#ffdc8a';ctx.fill()}
 let ps=[[s.x+.1,s.y+.1,0],[s.x+s.w-.1,s.y+.1,0],[s.x+s.w-.1,s.y+s.d-.1,0],[s.x+.1,s.y+s.d-.1,0]].map(p=>project(...p));drawnHit.push({slot:s,ps});}
 function tint(hex,delta){let c=hex.replace('#','');let r=parseInt(c.slice(0,2),16),g=parseInt(c.slice(2,4),16),b=parseInt(c.slice(4,6),16);let scale=delta>0?1:1+delta;return '#'+[r,g,b].map(v=>{let n=delta>0?v+(255-v)*delta:v*scale;return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0')}).join('')}
-function drawCars(){let objects=[];for(const s of slotsFloor(activeFloor))if(s.occupied&&!s.departing&&s.car)objects.push({x:s.cx,y:s.cy,angle:s.bank===0?0:Math.PI,car:s.car});for(const v of moving)if(v.floor===activeFloor)objects.push({x:v.x,y:v.y,angle:v.angle,car:v.car});objects.sort((a,b)=>project(a.x,a.y).y-project(b.x,b.y).y);for(let o of objects)drawCarOnMap(o.x,o.y,o.angle,o.car.model,o.car.color)}
-function drawSignage(){for(let band=0;band<2;band++)for(let col=0;col<3;col++){let s=band*3+col,x=X0+col*COLSTEP+SLOTW*5,y=Y0+band*BANDSTEP-3;txt(`SETOR ${sectorNames[s]}`,x,y,0,'#c3d8e0',10,'820')}
+// A small atlas of transparent car sprites amortizes all polygon/depth sorting.
+// It is shared across parked cars, independent from camera pan and floor changes.
+const parkedSpriteCache=new Map();let spriteViewKey='';
+function spriteProjectionConfig(){
+ const highZoom=viewScale()>6;
+ return {scale:(dims.w<530?4.0:5.8)*(highZoom?1.55:1),
+  key:[mode,cam.yaw.toFixed(3),dims.w<530?'mobile':'desktop',highZoom,dims.dpr,qualityMode].join('|')};
+}
+function cachedVehicleSprite(model,color,angle){
+ const view=spriteProjectionConfig();
+ if(view.key!==spriteViewKey){parkedSpriteCache.clear();spriteViewKey=view.key}
+ const key=model+'|'+color+'|'+angle;
+ const existing=parkedSpriteCache.get(key);if(existing)return existing;
+ const cs=Math.cos(angle),sn=Math.sin(angle),yawCos=Math.cos(cam.yaw),yawSin=Math.sin(cam.yaw);
+ const toRelative=pt=>{
+  const x=cs*pt[0]+sn*pt[1],y=sn*pt[0]-cs*pt[1],z=pt[2];
+  const rx=x*yawCos-y*yawSin,ry=x*yawSin+y*yawCos;
+  return mode==='3d'
+   ?{x:(rx-ry)*.83*view.scale,y:(rx+ry)*.405*view.scale-z*.96*view.scale,depth:rx+ry+z*1.1}
+   :{x:x*view.scale,y:y*view.scale-z*.15*view.scale,depth:rx+ry+z*1.1};
+ };
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+ for(const face of makeVehicleMesh(model,color,false))for(const pt of face.p){
+  const pos=toRelative(pt);
+  if(pos.x<minX)minX=pos.x;if(pos.y<minY)minY=pos.y;
+  if(pos.x>maxX)maxX=pos.x;if(pos.y>maxY)maxY=pos.y;
+ }
+ const padding=2.2,left=minX-padding,top=minY-padding;
+ const width=Math.ceil(maxX-minX+padding*2),height=Math.ceil(maxY-minY+padding*2);
+ const image=document.createElement('canvas');image.width=Math.ceil(width*dims.dpr);image.height=Math.ceil(height*dims.dpr);
+ const spriteCtx=image.getContext('2d');
+ spriteCtx.setTransform(dims.dpr,0,0,dims.dpr,0,0);
+ drawVehicleMesh(spriteCtx,pt=>{
+  const projected=toRelative(pt);
+  projected.x-=left;projected.y-=top;return projected;
+ },model,color,false);
+ const sprite={image,left,top,width,height,renderScale:view.scale};
+ parkedSpriteCache.set(key,sprite);return sprite;
+}
+function drawParkedSprite(x,y,angle,model,color){
+ const sprite=cachedVehicleSprite(model,color,angle),factor=viewScale()/sprite.renderScale;
+ const projected=project(x,y,0);
+ ctx.drawImage(sprite.image,projected.x+sprite.left*factor,projected.y+sprite.top*factor,
+  sprite.width*factor,sprite.height*factor);
+}
+function drawCars(layer='parked'){
+ let objects=[];
+ if(layer==='parked'){
+  for(const s of slotsFloor(activeFloor))if(s.occupied&&!s.inMotion&&s.car)
+   objects.push({x:s.cx,y:s.cy,angle:s.bank===0?0:Math.PI,car:s.car});
+ }else{
+  for(const v of moving)if(v.floor===activeFloor&&v.state==='driving')
+   objects.push({x:v.x,y:v.y,angle:v.angle,car:v.car,motion:v});
+ }
+ objects.sort((a,b)=>project(a.x,a.y).y-project(b.x,b.y).y);
+ for(const o of objects){
+  const p=project(o.x,o.y,1);
+  if(p.x<-65||p.x>dims.w+65||p.y<-75||p.y>dims.h+70)continue;
+  if(layer==='parked')drawParkedSprite(o.x,o.y,o.angle,o.car.model,o.car.color);
+  else drawCarOnMap(o.x,o.y,o.angle,o.car.model,o.car.color,o.motion||null);
+ }
+}
+function drawSignage(){if(dims.w<530&&cam.zoom<1.5)return;for(let band=0;band<2;band++)for(let col=0;col<3;col++){let s=band*3+col,x=X0+col*COLSTEP+SLOTW*5,y=Y0+band*BANDSTEP-3;txt(`SETOR ${sectorNames[s]}`,x,y,0,'#c3d8e0',10,'820')}
 for(let y of [32,82]){let q=project(186,y,3.2),q2=project(186,y,0);ctx.strokeStyle='#92aab4';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(q2.x,q2.y);ctx.stroke();ctx.fillStyle='#bdf477';ctx.beginPath();ctx.arc(q.x,q.y,Math.max(2,viewScale()*.55),0,Math.PI*2);ctx.fill()}}
-function draw(){if(!dims.w)return;ctx.clearRect(0,0,dims.w,dims.h);drawnHit=[];deck();let slots=slotsFloor(activeFloor);for(const s of slots)drawSpot(s);drawCars();drawSignage();updateLocationMarker();}
-function resize(){let b=stage.getBoundingClientRect();dims.dpr=Math.min(2,window.devicePixelRatio||1);dims.w=Math.max(100,b.width);dims.h=Math.max(100,b.height);canvas.width=Math.round(dims.w*dims.dpr);canvas.height=Math.round(dims.h*dims.dpr);ctx.setTransform(dims.dpr,0,0,dims.dpr,0,0);draw()}
+function sceneSignature(){return [activeFloor,mode,dims.w,dims.h,dims.dpr,cam.zoom,cam.yaw,cam.panX,cam.panY,selected?.id||'',staticRevision].join('|')}
+function rebuildStaticScene(signature){
+ const started=performance.now();
+ staticLayer.width=canvas.width;staticLayer.height=canvas.height;
+ const previous=ctx;ctx=staticCtx;
+ try{
+  ctx.setTransform(dims.dpr,0,0,dims.dpr,0,0);
+  ctx.clearRect(0,0,dims.w,dims.h);
+  drawnHit=[];deck();
+  for(const s of slotsFloor(activeFloor))drawSpot(s);
+  drawCars('parked');drawSignage();
+ }finally{ctx=previous}
+ staticKey=signature;
+ renderStats.cacheBuilds++;
+ renderStats.lastBuildMs=performance.now()-started;
+}
+function draw(){
+ if(!dims.w)return;
+ const started=performance.now(),signature=sceneSignature();
+ if(staticKey!==signature)rebuildStaticScene(signature);
+ ctx.clearRect(0,0,dims.w,dims.h);
+ ctx.drawImage(staticLayer,0,0,dims.w,dims.h);
+ drawCars('moving');
+ updateLocationMarker();
+ renderStats.paintedFrames++;
+ renderStats.lastPaintMs=performance.now()-started;
+}
+function resize(){
+ const box=stage.getBoundingClientRect();
+ dims.dpr=pixelRatio();dims.w=Math.max(100,box.width);dims.h=Math.max(100,box.height);
+ canvas.width=Math.round(dims.w*dims.dpr);canvas.height=Math.round(dims.h*dims.dpr);
+ ctx.setTransform(dims.dpr,0,0,dims.dpr,0,0);
+ staticKey='';draw();
+}
 function insidePoint(x,y,ps){let inside=false;for(let i=0,j=ps.length-1;i<ps.length;j=i++){let a=ps[i],b=ps[j];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)inside=!inside}return inside}
 function hit(x,y){
  // Inclui a carroceria elevada: o mouse sobre teto, vidros ou carros em movimento também ativa o tíquete.
  const objects=[];
- for(const s of slotsFloor(activeFloor))if(s.occupied&&!s.departing&&s.car)objects.push({x:s.cx,y:s.cy,angle:s.bank===0?0:Math.PI,car:s.car,slot:s});
- for(const v of moving)if(v.floor===activeFloor)objects.push({x:v.x,y:v.y,angle:v.angle,car:v.car,slot:v.slot});
+ for(const s of slotsFloor(activeFloor))if(s.occupied&&!s.inMotion&&s.car)objects.push({x:s.cx,y:s.cy,angle:s.bank===0?0:Math.PI,car:s.car,slot:s});
+ for(const v of moving)if(v.floor===activeFloor&&v.state==='driving')objects.push({x:v.x,y:v.y,angle:v.angle,car:v.car,slot:v.slot});
  objects.sort((a,b)=>project(b.x,b.y).y-project(a.x,a.y).y);
  let bestScore=Infinity,bestSlot=null;
  for(const o of objects){
@@ -948,8 +1326,40 @@ function drawChart(){
  svg.innerHTML=`<defs><linearGradient id="trackfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#73c2a5" stop-opacity=".22"/><stop offset="1" stop-color="#73c2a5" stop-opacity=".015"/></linearGradient></defs>${grid}<path d="${fillPath}" fill="url(#trackfill)"/>${floorsLines}<path d="${totalPath}" stroke="#087b64" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="${xx}" cy="${yy}" r="5.5" fill="#fff" stroke="#087b64" stroke-width="3"/><rect x="${Math.max(50,xx-74)}" y="${Math.max(0,yy-32)}" rx="5" width="64" height="23" fill="#e9f7f0" stroke="#bfe2d1"/><text x="${Math.max(82,xx-42)}" y="${Math.max(16,yy-16)}" text-anchor="middle" fill="#0b705a" font-size="14" font-weight="800">${last.toFixed(1).replace('.',',')}%</text>`;
 }
 function syncClock(){let now=new Date();$('dateNow').textContent=now.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});$('timeNow').textContent=now.toLocaleTimeString('pt-BR',{hour12:false})}
-function frame(ts){const realDt=lastFrame?Math.min(.08,(ts-lastFrame)/1000):0;lastFrame=ts;if(!paused){let dt=realDt*speed;simtime+=dt;updateMotion(dt);if(simtime-lastSpawn>3){lastSpawn=simtime;if(moving.length<14){let f=Math.floor(rng()*3),t=rng()<.6?'arrival':'departure';spawn(t,Math.floor(rand(1,3)),f)}}if(simtime-lastChart>5){lastChart=simtime;hist.push(occ()/360*100);hist=hist.slice(-22);for(let f=0;f<3;f++){histFloors[f].push(occupiedFloor(f)/120*100);histFloors[f]=histFloors[f].slice(-22)}floors.forEach(f=>f.slots.forEach(s=>{if(s.occupied)s.duration++}));syncUI();drawChart()}}if(Math.floor(ts/1000)!==Math.floor((ts-realDt*1000)/1000))syncClock();if(ts-lastRender>32){draw();lastRender=ts}requestAnimationFrame(frame)}
-function startListeners(){document.querySelectorAll('#floors button').forEach(b=>b.onclick=()=>setFloor(+b.dataset.floor));$('isoBtn').onclick=()=>setMode('3d');$('topBtn').onclick=()=>setMode('2d');$('pause').onclick=()=>{if(!canDo('operate'))return notify('Perfil Consulta não controla a simulação.',true);paused=!paused;$('pause').textContent=paused?'▶  Retomar':'Ⅱ   Pausar';$('pause').classList.toggle('primary',!paused);$('chartFlag').textContent=paused?'Ⅱ  SIMULAÇÃO PAUSADA':'● ATUALIZAÇÃO CONTÍNUA';$('stageStatus').textContent=paused?'SIMULAÇÃO PAUSADA':'SIMULAÇÃO · FLUXO EM MOVIMENTO';refreshHover()};$('addCars').onclick=()=>{if(canDo('operate'))spawn('arrival',5,activeFloor,true)};$('removeCars').onclick=()=>{if(canDo('operate'))spawn('departure',5,activeFloor,true)};document.querySelectorAll('.speedbtn').forEach(b=>b.onclick=()=>{if(!canDo('operate'))return notify('Controle indisponível para Consulta.',true);speed=+b.dataset.speed;document.querySelectorAll('.speedbtn').forEach(q=>q.classList.toggle('active',q===b))});$('zoomIn').onclick=()=>cam.zoom=Math.min(2.9,cam.zoom*1.2);$('zoomOut').onclick=()=>cam.zoom=Math.max(.5,cam.zoom/1.2);$('rotateLeft').onclick=()=>{mode='3d';cam.yaw=Math.max(-.85,cam.yaw-.17);setViewButtons()};$('rotateRight').onclick=()=>{mode='3d';cam.yaw=Math.min(.85,cam.yaw+.17);setViewButtons()};$('resetView').onclick=()=>{if(locationActive){resetLocationView()}else{cam={zoom:1,yaw:0,panX:0,panY:0};draw()}};
+function frame(ts){
+ const realDt=lastFrame?Math.min(.2,Math.max(0,(ts-lastFrame)/1000)):0;lastFrame=ts;
+ // Do not spend battery or stack up simulation work while the tab is hidden.
+ if(document.hidden){physicsAccumulator=0;requestAnimationFrame(frame);return}
+ if(!paused){
+  physicsAccumulator=Math.min(.32,physicsAccumulator+realDt*speed);
+  let steps=0;
+  while(physicsAccumulator>=.04&&steps++<8){
+   updateMotion(.04);simtime+=.04;physicsAccumulator-=.04;
+  }
+  if(simtime-lastSpawn>=2.6){
+   lastSpawn=simtime;
+   if(moving.length<16){let f=Math.floor(rng()*3),t=rng()<.6?'arrival':'departure';spawn(t,Math.floor(rand(1,3)),f)}
+  }
+  if(simtime-lastChart>=5){
+   lastChart=simtime;hist.push(occ()/360*100);hist=hist.slice(-22);
+   for(let f=0;f<3;f++){histFloors[f].push(occupiedFloor(f)/120*100);histFloors[f]=histFloors[f].slice(-22)}
+   floors.forEach(f=>f.slots.forEach(s=>{if(s.occupied)s.duration++}));syncUI();drawChart();
+  }
+ }else{physicsAccumulator=0}
+ const sec=Math.floor(ts/1000);if(sec!==clockSecond){clockSecond=sec;syncClock()}
+ const changing=moving.some(v=>v.floor===activeFloor&&v.state==='driving');
+ if(ts-lastRender>=frameInterval()&&(changing||staticKey!==sceneSignature())){
+  draw();lastRender=ts;
+ }
+ requestAnimationFrame(frame);
+}
+function startListeners(){
+ $('qualityButton').onclick=()=>{
+  qualityMode=qualityMode==='auto'?'economy':qualityMode==='economy'?'quality':'auto';
+  $('qualityButton').textContent=qualityMode==='auto'?'Render: autom\u00e1tico':qualityMode==='economy'?'Render: econ\u00f4mico':'Render: qualidade';
+  resize();
+ };
+ document.querySelectorAll('#floors button').forEach(b=>b.onclick=()=>setFloor(+b.dataset.floor));$('isoBtn').onclick=()=>setMode('3d');$('topBtn').onclick=()=>setMode('2d');$('pause').onclick=()=>{if(!canDo('operate'))return notify('Perfil Consulta não controla a simulação.',true);paused=!paused;$('pause').textContent=paused?'▶  Retomar':'Ⅱ   Pausar';$('pause').classList.toggle('primary',!paused);$('chartFlag').textContent=paused?'Ⅱ  SIMULAÇÃO PAUSADA':'● ATUALIZAÇÃO CONTÍNUA';$('stageStatus').textContent=paused?'SIMULAÇÃO PAUSADA':'TRÁFEGO 3D · ANTICOLISÃO ATIVA';refreshHover()};$('addCars').onclick=()=>{if(canDo('operate'))spawn('arrival',5,activeFloor,true)};$('removeCars').onclick=()=>{if(canDo('operate'))spawn('departure',5,activeFloor,true)};document.querySelectorAll('.speedbtn[data-speed]').forEach(b=>b.onclick=()=>{if(!canDo('operate'))return notify('Controle indisponível para Consulta.',true);speed=+b.dataset.speed;document.querySelectorAll('.speedbtn[data-speed]').forEach(q=>q.classList.toggle('active',q===b))});$('zoomIn').onclick=()=>cam.zoom=Math.min(2.9,cam.zoom*1.2);$('zoomOut').onclick=()=>cam.zoom=Math.max(.5,cam.zoom/1.2);$('rotateLeft').onclick=()=>{mode='3d';cam.yaw=Math.max(-.85,cam.yaw-.17);setViewButtons()};$('rotateRight').onclick=()=>{mode='3d';cam.yaw=Math.min(.85,cam.yaw+.17);setViewButtons()};$('resetView').onclick=()=>{if(locationActive){resetLocationView()}else{cam={zoom:1,yaw:0,panX:0,panY:0};draw()}};
  stage.addEventListener('wheel',e=>{e.preventDefault();cam.zoom=Math.max(.5,Math.min(3,cam.zoom*(e.deltaY<0?1.09:.92)))},{passive:false});
  stage.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag.down=true;drag.moved=false;drag.x=e.clientX;drag.y=e.clientY;drag.lx=e.clientX;drag.ly=e.clientY;stage.setPointerCapture(e.pointerId)});
  stage.addEventListener('pointermove',e=>{let b=canvas.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;if(drag.down){let dx=e.clientX-drag.lx,dy=e.clientY-drag.ly;if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>5)drag.moved=true;if(drag.moved){cam.panX+=dx;cam.panY+=dy;stage.classList.add('dragging')};drag.lx=e.clientX;drag.ly=e.clientY;$('hover').style.display='none';return}let s=hit(x,y);if(s!==hovered){hovered=s;if(s){refreshHover();$('hover').style.display='block'}else $('hover').style.display='none'}if(s){positionHover(x,y)}});
@@ -958,6 +1368,18 @@ function startListeners(){document.querySelectorAll('#floors button').forEach(b=
  }
 function setViewButtons(){$('isoBtn').classList.toggle('active',mode==='3d');$('topBtn').classList.toggle('active',mode==='2d');syncUI()}
 init();syncClock();startListeners();resize();initShowroom();initOperations();initBusinessModules();renderRole();requestAnimationFrame(frame);
-window.ParkVisionDebug={getTracking:()=>trackingRowsFiltered().map(s=>({id:s.id,ticket:s.car.ticket,duration:s.duration,amount:billFor(s.duration)})),getSlots:(f=activeFloor)=>slotsFloor(f).map(s=>({id:s.id,occupied:s.occupied,reserved:s.reserved,duration:s.duration,ticket:s.car?.ticket||null})),getStatus:()=>({slots:floors.map(f=>f.slots.length),occupied:occ(),moving:moving.length,arrivals,departures,floor:activeFloor,mode,zoom:cam.zoom,panX:cam.panX,panY:cam.panY,locationActive,locationSlot:locationSlot?.id||null,tariff,revenue,paidTickets,models:Object.keys(CAR_DEFS)}),getBusiness:()=>({ledger:ledger.map(t=>({ticket:t.ticket,spot:t.spot,floor:t.floor,sector:t.sector,status:t.status,gross:t.gross,discount:t.discount,net:t.net,method:t.method})),audit:auditTrail.slice(),shiftSnapshots:shiftSnapshots.slice(),role:demoRole,graceMinutes}),arrive:()=>spawn('arrival',5,activeFloor,true),depart:()=>spawn('departure',5,activeFloor,true),selectFloor:setFloor};
+function trafficCollisions(){
+ const active=moving.filter(m=>m.state==='driving');let count=0;
+ for(let i=0;i<active.length;i++){
+  for(let j=i+1;j<active.length;j++)if(active[i].floor===active[j].floor&&vehicleOverlap(active[i],active[j],.05))count++;
+  const m=active[i];for(const s of slotsFloor(m.floor)){
+   if(s===m.slot||!s.occupied||!s.car||s.inMotion)continue;
+   if(Math.abs(m.x-s.cx)>10||Math.abs(m.y-s.cy)>10)continue;
+   if(vehicleOverlap(m,{x:s.cx,y:s.cy,angle:s.bank===0?0:Math.PI,car:s.car},.02))count++;
+  }
+ }
+ return count;
+}
+window.ParkVisionDebug={getTracking:()=>trackingRowsFiltered().map(s=>({id:s.id,ticket:s.car.ticket,duration:s.duration,amount:billFor(s.duration)})),getSlots:(f=activeFloor)=>slotsFloor(f).map(s=>({id:s.id,occupied:s.occupied,reserved:s.reserved,duration:s.duration,ticket:s.car?.ticket||null})),getStatus:()=>({slots:floors.map(f=>f.slots.length),occupied:occ(),moving:moving.filter(v=>v.state==='driving').length,queued:moving.filter(v=>v.state==='queued').length,arrivals,departures,floor:activeFloor,mode,zoom:cam.zoom,panX:cam.panX,panY:cam.panY,locationActive,locationSlot:locationSlot?.id||null,tariff,revenue,paidTickets,models:Object.keys(CAR_DEFS)}),getPerformance:()=>({...renderStats,parkedSpriteCount:parkedSpriteCache.size,qualityMode,lowPowerDevice,dpr:dims.dpr,frameCap:Math.round(1000/frameInterval())}),getTraffic:()=>({stops:trafficStops,vehicles:moving.map(m=>({id:m.slot.id,type:m.type,floor:m.floor,band:m.band,state:m.state,dist:m.dist,total:m.route.total,x:m.x,y:m.y,angle:m.angle,velocity:m.velocity,blocked:m.blocked})),collisions:trafficCollisions()}),step:(dt=.05,redraw=true)=>{updateMotion(dt);if(redraw)draw()},getBusiness:()=>({ledger:ledger.map(t=>({ticket:t.ticket,spot:t.spot,floor:t.floor,sector:t.sector,status:t.status,gross:t.gross,discount:t.discount,net:t.net,method:t.method})),audit:auditTrail.slice(),shiftSnapshots:shiftSnapshots.slice(),role:demoRole,graceMinutes}),arrive:()=>spawn('arrival',5,activeFloor,true),depart:()=>spawn('departure',5,activeFloor,true),selectFloor:setFloor};
 })();
 </script></body></html>
