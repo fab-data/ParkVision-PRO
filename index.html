@@ -766,6 +766,52 @@ function spawn(type,n=1,floor=activeFloor,manual=false){
  }
  return created;
 }
+// Cinematic warm start: the G1 scene opens with real cars already travelling,
+// rather than waiting for the first random event or for a car to reach the aisle.
+// Uses the SAME routes, collision checks and finish handling as normal traffic.
+function beginImmediateG1Flow(){
+ const highlights=[
+  {sector:0,target:45,visibleX:156,model:'SUV',color:'#e58b46'},
+  {sector:4,target:93,visibleX:150,model:'Sedã',color:'#6e9ebd'}
+ ];
+ let started=0;
+ for(const item of highlights){
+  const choices=slotsFloor(0).filter(s=>!s.occupied&&!s.reserved&&s.sector===item.sector&&s.kind==='Convencional');
+  choices.sort((a,b)=>Math.abs(a.cx-item.target)-Math.abs(b.cx-item.target));
+  for(const slot of choices){
+   const car=randomCar();car.model=item.model;car.color=item.color;
+   const route=routeFor(slot,'arrival'),aisle=Y0+Math.floor(slot.sector/3)*BANDSTEP+SLOTD+LANE/2;
+   const inbound=aisle-TRAFFIC.laneOffset;
+   const vehicle={type:'arrival',slot,floor:0,band:Math.floor(slot.sector/3),car,route,
+    dist:0,state:'driving',x:0,y:0,angle:-Math.PI/2,velocity:16,
+    speed:35,blocked:false};
+   // Pick an on-screen point in the inbound lane where the vehicle is not
+   // clipping parked cars or any other warm-start vehicle.
+   let chosen=null;
+   // Straight road segments have sparse waypoints; sample the interpolated
+   // route, not only the endpoints, to position the car in the visible lane.
+   for(let d=10;d<route.total-8;d+=1.5){
+    const pt=routePosition(route,d);
+    if(pt.phase!=='cruise'||Math.abs(pt.y-inbound)>0.6||pt.x<115||pt.x>177)continue;
+    if(!freeOfCollisions(vehicle,pt))continue;
+    const score=Math.abs(pt.x-item.visibleX);
+    if(!chosen||score<chosen.score)chosen={pt,dist:d,score};
+   }
+   if(!chosen)continue;
+   slot.reserved=true;slot.car=car;
+   Object.assign(vehicle,{dist:chosen.dist,x:chosen.pt.x,y:chosen.pt.y,angle:chosen.pt.angle});
+   moving.push(vehicle);started++;break;
+  }
+ }
+ if(started){
+  staticRevision++;
+  addLog('entry','G1 em movimento desde a abertura',`${started} veículos circulando no mapa 3D · demonstração`);
+  // A queued exit takes over when the two arrivals have parked, keeping the
+  // opening scene lively without bypassing the floor traffic controller.
+  spawn('departure',1,0,false);
+  syncUI();
+ }
+}
 function completeMotion(m){
  m.slot.inMotion=false;staticRevision++;
  if(m.type==='arrival'){
@@ -1338,7 +1384,15 @@ function frame(ts){
   }
   if(simtime-lastSpawn>=2.6){
    lastSpawn=simtime;
-   if(moving.length<16){let f=Math.floor(rng()*3),t=rng()<.6?'arrival':'departure';spawn(t,Math.floor(rand(1,3)),f)}
+   if(moving.length<16){
+    // Give the floor on screen priority whenever its circulation goes quiet.
+    // Other floors still receive background traffic as before.
+    const visible=moving.some(v=>v.floor===activeFloor&&v.state==='driving');
+    const earlyG1=simtime<18&&activeFloor===0&&moving.filter(v=>v.floor===0).length<2;
+    const f=earlyG1||(!visible&&rng()<.75)?activeFloor:Math.floor(rng()*3);
+    const t=rng()<.6?'arrival':'departure';
+    spawn(t,Math.floor(rand(1,3)),f);
+   }
   }
   if(simtime-lastChart>=5){
    lastChart=simtime;hist.push(occ()/360*100);hist=hist.slice(-22);
@@ -1367,7 +1421,7 @@ function startListeners(){
  window.addEventListener('keydown',e=>{if(e.key==='Escape'){if(locationActive)resetLocationView();else{selected=null;syncDetail();syncMapFeature()}return}if(e.target.closest('input,textarea,select,[contenteditable]'))return;if(['+','='].includes(e.key))cam.zoom=Math.min(3,cam.zoom*1.1);if(e.key==='-')cam.zoom=Math.max(.5,cam.zoom/.91)});
  }
 function setViewButtons(){$('isoBtn').classList.toggle('active',mode==='3d');$('topBtn').classList.toggle('active',mode==='2d');syncUI()}
-init();syncClock();startListeners();resize();initShowroom();initOperations();initBusinessModules();renderRole();requestAnimationFrame(frame);
+init();beginImmediateG1Flow();syncClock();startListeners();resize();initShowroom();initOperations();initBusinessModules();renderRole();requestAnimationFrame(frame);
 function trafficCollisions(){
  const active=moving.filter(m=>m.state==='driving');let count=0;
  for(let i=0;i<active.length;i++){
